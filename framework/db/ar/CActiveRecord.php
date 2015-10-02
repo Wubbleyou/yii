@@ -1370,6 +1370,12 @@ abstract class CActiveRecord extends CModel
 	 */
 	public function applyScopes(&$criteria)
 	{
+		if (!empty($criteria->alias)) {
+
+			$this->resetScope(false);
+			$this->setTableAlias($criteria->alias);
+		}
+		
 		if(!empty($criteria->scopes))
 		{
 			$scs=$this->scopes();
